@@ -2,6 +2,8 @@ package learning.yan.com.productmanagement.service
 
 import learning.yan.com.productmanagement.domain.Product
 
-fun interface CreateProductService {
-    fun createProduct(product: Product)
+class CreateProductUseCase: CreateProductService {
+    override fun createProduct(product: Product) {
+
+    }
 }

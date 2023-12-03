@@ -1,11 +1,18 @@
 server:
   port: 8080
+
 spring:
   main:
     banner-mode: off
+  datasource:
+    url: jdbc:postgresql://localhost:5432/product_management
+    username: admin
+    password: admin
+
 logging:
   level:
     root: INFO
   pattern:
     console: '%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n'
     file: '%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n'
+

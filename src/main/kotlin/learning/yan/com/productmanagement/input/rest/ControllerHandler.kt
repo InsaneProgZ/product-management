@@ -42,20 +42,29 @@ class ControllerHandler {
         return ResponseEntity(response, HttpStatus.BAD_REQUEST)
     }
 
+    @ExceptionHandler(ProductNotFoundException::class)
+    fun productNotFoundException(exception: ProductNotFoundException): ResponseEntity<String> {
+        logger.info("m=productNotFoundException {}", KeyValuePair("exception", exception))
+        return ResponseEntity(Error.PRODUCT_NOT_FOUND.message, HttpStatus.NOT_FOUND)
+    }
+
     @ExceptionHandler(Exception::class)
     fun default(exception: Exception): ResponseEntity<String> {
         logger.info("m=default {}", KeyValuePair("exception", exception))
-        return ResponseEntity(Error.INTERNAL_ERROR.message, HttpStatus.UNPROCESSABLE_ENTITY)
+        return ResponseEntity(Error.INTERNAL_ERROR.message, HttpStatus.INTERNAL_SERVER_ERROR)
     }
 }
 
 enum class Error(val message: String) {
     PRODUCT_ALREADY_REGISTERED("Product name Already registered"),
     INTERNAL_ERROR("Some internal error occurs, try again in few seconds."),
-    FIELD_REQUIRED("Field required")
+    FIELD_REQUIRED("Field required"),
+    PRODUCT_NOT_FOUND("Product not found")
 }
 
 data class ErrorResponse(
     val field: String,
     val message: String
 )
+
+class ProductNotFoundException : RuntimeException()

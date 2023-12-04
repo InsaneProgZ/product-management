@@ -5,9 +5,9 @@ import learning.yan.com.productmanagement.output.database.ProductDatabase
 import org.springframework.stereotype.Service
 
 @Service
-class CreateProductUseCase(val productDatabase:ProductDatabase): CreateProductService {
+class UpdateProductUseCase(val productDatabase:ProductDatabase): UpdateProductService {
 
-    override fun createProduct(product: Product): Product {
-        return productDatabase.save(product)
+    override fun updateProduct(product: Product): Product {
+        return productDatabase.update(product)
     }
 }

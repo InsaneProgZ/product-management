@@ -10,5 +10,6 @@ services:
       POSTGRES_PASSWORD: admin
     ports:
       - "5432:5432"
-
+    volumes:
+      - ./postegreeInitialize/init.sql:/docker-entrypoint-initdb.d/init.sql
 

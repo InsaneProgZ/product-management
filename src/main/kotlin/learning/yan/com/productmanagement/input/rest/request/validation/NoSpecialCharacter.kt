@@ -14,9 +14,9 @@ annotation class NoSpecialCharacter(
     val payload: Array<KClass<out Payload>> = []
 )
 
-class LettersOnlyValidator : ConstraintValidator<NoSpecialCharacter, String?> {
-    override fun isValid(value: String?, context: ConstraintValidatorContext): Boolean {
-        return value != null && value.chars().allMatch { codePoint: Int ->
+class LettersOnlyValidator : ConstraintValidator<NoSpecialCharacter, String> {
+    override fun isValid(value: String, context: ConstraintValidatorContext): Boolean {
+        return value.chars().allMatch { codePoint: Int ->
             Character.isAlphabetic(codePoint) || Character.isSpaceChar(codePoint) || Character.isDigit(codePoint)
         }
     }

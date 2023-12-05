@@ -63,8 +63,8 @@ class ProductController(
 
     @DeleteMapping("/name/{name}")
     @ResponseStatus(HttpStatus.OK)
-    fun deleteProductByName (@PathVariable name: String): CreateProductResponse {
+    fun deleteProductByName (@PathVariable name: String) {
         logger.info("m=deleteProductByName {}", KeyValuePair("name", name))
-        return deleteProductService.deleteProductByName(name).toResponse()
+        return deleteProductService.deleteProductByName(name)
     }
 }

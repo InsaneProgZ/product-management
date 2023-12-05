@@ -52,9 +52,9 @@ class ProductPostegree(val repository: ProductRepository) : ProductDatabase {
         return repository.deleteById(id)
     }
 
-    override fun deleteByName(name: String): Product {
+    override fun deleteByName(name: String) {
         logger.info("m=deleteByName {}", KeyValuePair("name", name))
-        return repository.deleteByName(name)?.toDomain() ?: throw ProductNotFoundException()
+        return repository.deleteByName(name)
     }
 
 }

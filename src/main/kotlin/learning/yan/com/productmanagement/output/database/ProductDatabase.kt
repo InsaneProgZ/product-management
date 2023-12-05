@@ -8,5 +8,5 @@ interface ProductDatabase {
     fun findById(id: Int): Product
     fun update(product: Product): Product
     fun deleteById(id: Int)
-    fun deleteByName(name: String): Product
+    fun deleteByName(name: String)
 }

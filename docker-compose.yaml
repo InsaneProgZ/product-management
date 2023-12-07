@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - internal
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
   postgres:
     image: postgres:latest
     container_name: postegres
@@ -11,7 +25,14 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postegreeInitialize/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d product_management -h localhost -p 5432"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
   redis:
     image: "redis:latest"
     container_name: "redis"
@@ -19,3 +40,13 @@ services:
       - "6379:6379"
     environment:
       - REDIS_PASSWORD=admin
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+networks:
+  internal:
+    driver: bridge

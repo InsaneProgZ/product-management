@@ -53,4 +53,3 @@ configure<TestLoggerExtension> {
     theme = ThemeType.MOCHA
     showExceptions = true
 }
-

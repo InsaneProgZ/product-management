@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 variables:
-  tag: '$(tagName)'
+  tag: '$(Build.SourceBranchName)'
 
 stages:
 - stage: Build

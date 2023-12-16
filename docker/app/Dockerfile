@@ -3,11 +3,8 @@ FROM gradle:jdk21-alpine AS dependencies
 
 WORKDIR /app
 
-COPY build.gradle.kts .
-COPY settings.gradle.kts .
-
-# Download and cache the Gradle dependencies
-COPY gradle gradle
+COPY ../../build.gradle.kts .
+COPY ../../settings.gradle.kts .
 
 # Download dependencies
 RUN gradle --no-daemon dependencies
@@ -21,7 +18,7 @@ WORKDIR /app
 COPY --from=dependencies /app .
 
 # Copy the rest of the source code
-COPY src src
+COPY ../../src src
 
 # Build the project
 RUN gradle --no-daemon build

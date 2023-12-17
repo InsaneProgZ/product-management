@@ -36,3 +36,4 @@ out/
 ### VS Code ###
 .vscode/
 /infra/.terraform/
+/infra/.terraform.lock.hcl

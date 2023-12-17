@@ -7,7 +7,7 @@ COPY build.gradle.kts .
 COPY settings.gradle.kts .
 
 # Download dependencies
-RUN gradle --no-daemon dependencies
+RUN gradle --refresh-dependencies
 
 # Stage 2: Build the Project
 FROM dependencies AS build
@@ -21,16 +21,19 @@ COPY --from=dependencies /app .
 COPY src src
 
 # Build the project
-RUN gradle --no-daemon build
+RUN gradle --no-daemon jar
 
 # Stage 2: Build and run
-FROM build AS run
+FROM amazoncorretto:21-alpine-jdk
+
+WORKDIR /app
 
 ENV POSTGRES_HOST postegres
 ENV REDIS_HOST redis
 
+COPY --from=build /app/build/libs/*.jar ./app.jar
 # Expose the port that the application will run on
 EXPOSE 8080
 
 # Command to run the application
-CMD ["gradle", "bootRun"]
+CMD ["java", "-jar", "app"]

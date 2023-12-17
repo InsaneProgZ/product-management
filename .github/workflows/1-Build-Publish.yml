@@ -27,4 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: yanzingra/product-management:latest,yanzingra/product-management:1.0.0
+          tags: yanzingra/product-management:latest,yanzingra/product-management:${{ github.run_number }}

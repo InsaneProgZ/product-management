@@ -5,7 +5,7 @@ services:
     container_name: api
     build:
       context: ../
-      dockerfile: ./docker/app/Dockerfile
+      dockerfile: .
     ports:
       - "8080:8080"
     networks:

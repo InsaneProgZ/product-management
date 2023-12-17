@@ -4,7 +4,9 @@ name: workflow-practice
 
 on:
   push:
-    branches: [ "main" ]
+#    branches: [ "main" ]
+    tags:
+      - '*'
 
   workflow_dispatch:
 jobs:

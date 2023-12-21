@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "aks_rg" {
 }
 
 resource "azurerm_kubernetes_cluster" "aks_cluster" {
-  name                = "myAKSCluster"
+  name                = "AKSCluster"
   location            = azurerm_resource_group.aks_rg.location
   resource_group_name = azurerm_resource_group.aks_rg.name
   dns_prefix          = "yan-test"
@@ -18,8 +18,8 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   }
 
   service_principal {
-    client_id     = "YOUR_AZURE_CLIENT_ID"
-    client_secret = "YOUR_AZURE_CLIENT_SECRET"
+    client_id     = "env.client_id"
+    client_secret = "env.secret"
   }
 
   network_profile {

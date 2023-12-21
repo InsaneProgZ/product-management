@@ -15,7 +15,7 @@ spring:
       host: ${REDIS_HOST:localhost}
       port: 6379
       password: admin
-      timeout: 20000
+      timeout: 20000k
 
 logging:
   pattern:
